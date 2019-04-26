@@ -1,0 +1,26 @@
+---
+# tasks file for mysql_db
+
+  - name: Install MySQL database
+    yum: 
+      name: mysql 
+      state: present 
+ 
+  - name: "Start MySQL Service"
+    service:
+       name: mariadb
+       state: started
+       enabled: yes
+
+  - name: Create Application database
+    mysql_db: 
+       name: mysql_testdb
+       state: present
+  
+  - name: Create database user
+    mysql_user: 
+       name: ram
+       password: redhat 
+       priv: '*.*:ALL'
+       state: present
+       host: '%'  
